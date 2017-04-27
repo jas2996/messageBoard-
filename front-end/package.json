@@ -1,7 +1,9 @@
 {
   "name": "myMessageFront",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.17.1"
+  },
   "scripts": {
     "test": "gulp test"
   },
