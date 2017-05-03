@@ -1,12 +1,14 @@
-export class AuthController{
+export class AuthController {
 
-	constructor($auth){
-		'ngInject';
-		this.$auth = $auth;
-	}
-	register(){
-		console.log("works")
-		this.$auth.signup({email: 'contact@jaslamba.me'})
-	}
-	
+    constructor($auth) {
+        'ngInject';
+        this.$auth = $auth;
+    }
+    register() {
+        //console.log("works")
+        var vm = this;
+        this.$auth.signup(this.user).then(function(token) {
+            vm.$auth.setToken(token)
+        });
+    }
 }
