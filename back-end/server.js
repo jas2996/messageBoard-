@@ -7,23 +7,22 @@ var mongoose = require('mongoose');
 //var User = require('./models/user')
 var auth = require('./controllers/auth');
 var message = require('./controllers/message'); 
+var checkAuthenticated = require('./services/checkAuthenticated'); 
+var cors = require('./services/cors'); 
 
 //var database;
 //var Message = mongoose.model('Message',{
 //	msg: String
 //}); 
 
-app.use(bodyParser.json())
+//MiddleWare
+app.use(bodyParser.json());
+app.use(cors);
 
-app.use(function(req,res,next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    next();
-})
 
+//Requests
 app.get('/api/message', message.get);
-
-app.post('/api/message', message.post); //function(req,res){
+app.post('/api/message', checkAuthenticated, message.post); //function(req,res){
 	//console.log(req.body);
 
 	//var message = new Message(req.body);
@@ -54,6 +53,7 @@ app.post('/auth/register', auth.register); //function(req,res){
 //	})
 //}
 
+//Connection 
 mongoose.connect("mongodb://localhost:27017/test", function(err, db){
 	if (!err){
 		console.log("we are connected to mongo");
