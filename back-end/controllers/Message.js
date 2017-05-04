@@ -1,8 +1,8 @@
 var Message = require('../models/message');
 
 module.exports = {
-    get: function (req, res) {
-        Message.find({}).populate('user', '-pwd').exec(function(err, result) {
+    get: function(req, res) {
+        Message.find({}).populate('user', '-pwd ').exec(function(err, result) {
             res.send(result);
         })
     },
